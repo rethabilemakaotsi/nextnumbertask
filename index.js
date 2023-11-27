@@ -1,16 +1,18 @@
+function nextNumbersGenerator(numbers) {
+  let index = 0;
 
-
-function diplayNextNumber() {
-    
-    const currentNumber = parseFloat(document.getElementById('Number').value);
-
-    if (isNaN(currentNumber)) {
-        document.getElementById('result').textContent = 'Please enter a valid number.';
-        return;
-    }
-
-    const nextNumber = currentNumber + 1;
-
-
-    document.getElementById('result').textContent = `Next Number: ${nextNumber}`;
+  return function () {
+      const outputElement = document.getElementById('output');
+      outputElement.textContent = numbers[index];
+      index = (index + 1) % numbers.length;
+  };
 }
+
+
+const numbers = [1, 2, 3, 4, 5];
+const getNextNumber = nextNumbersGenerator(numbers);
+
+
+document.getElementById('nextButton').addEventListener('click', getNextNumber);
+
+
